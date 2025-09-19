@@ -10,4 +10,4 @@ aiohttp>=3.8.0
 # LangChain and Google Gemini integration (adjust exact package name/version if needed)
 langchain>=0.0.200
 langchain-google-genai>=0.1.0
-google-generative-ai>=0.3.0
+google-generativeai>=0.8.0

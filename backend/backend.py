@@ -104,3 +104,12 @@ async def generate_story(request: StoryRequest):
         print(f"An error occurred: {e}")
         # Return an error message to the frontend if something goes wrong
         return {"error": "Failed to generate story from AI."}
+
+# --- 4. Server Startup ---
+
+if __name__ == "__main__":
+    import uvicorn
+    print("Starting VedaTale Backend Server...")
+    print("Server will be available at: http://localhost:8000")
+    print("API documentation at: http://localhost:8000/docs")
+    uvicorn.run(app, host="0.0.0.0", port=8000)
