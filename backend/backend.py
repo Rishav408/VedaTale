@@ -9,7 +9,8 @@ from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent.parent
 # Load environment variables (like your API key) from the .env file
 load_dotenv()
 
@@ -84,11 +85,11 @@ async def generate_story(request: StoryRequest):
 
 # --- 4. Serve Static Pages ---
 # ✅ This makes everything inside the "pages" folder available at "/"
-app.mount("/", StaticFiles(directory="../pages", html=True), name="static-pages")
-# Serve CSS files at /styles/*
-app.mount("/styles", StaticFiles(directory="../styles"), name="static-styles")
-# Serve JS files at /scripts/*
-app.mount("/scripts", StaticFiles(directory="../scripts"), name="static-scripts")
+app.mount("/", StaticFiles(directory=BASE_DIR / "pages", html=True), name="static-pages")
+# Serve CSS at /styles/*
+app.mount("/styles", StaticFiles(directory=BASE_DIR / "styles"), name="static-styles")
+# Serve JS at /scripts/*
+app.mount("/scripts", StaticFiles(directory=BASE_DIR / "scripts"), name="static-scripts")
 
 
 # --- 5. Server Startup ---
