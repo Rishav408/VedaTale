@@ -84,7 +84,8 @@ async def generate_story(request: StoryRequest):
 
 # --- 4. Serve Static Pages ---
 # ✅ This makes everything inside the "pages" folder available at "/"
-app.mount("/", StaticFiles(directory="pages", html=True), name="static")
+app.mount("/", StaticFiles(directory="../pages", html=True), name="static")
+
 
 # --- 5. Server Startup ---
 
