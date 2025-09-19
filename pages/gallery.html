@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Gallery - VedaTale</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/styles/gallery.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">
+            <i class="fas fa-book-open"></i>
+            Veda<span>Tale</span>
+        </a>
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="create.html">Create</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="header-controls">
+            <div class="theme-toggle">
+                <i class="fas fa-sun"></i>
+                <i class="fas fa-moon"></i>
+            </div>
+            <button class="btn btn-outline">Log In</button>
+            <button class="btn btn-primary">Sign Up</button>
+        </div>
+    </header>
+
+    <!-- Gallery Hero -->
+    <section class="gallery-hero">
+        <div class="hero-content">
+            <h1>Story Gallery</h1>
+            <p>Discover enchanting tales crafted by our community, inspired by the timeless wisdom of Hindu mythology and beyond.</p>
+            <div class="search-container">
+                <input type="text" placeholder="Search stories, authors, or keywords...">
+                <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Controls -->
+    <section class="gallery-controls">
+        <div class="controls-container">
+            <div class="filter-group">
+                <label>Filter by:</label>
+                <select id="genre-filter">
+                    <option value="all">All Genres</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="sci-fi">Sci-Fi</option>
+                    <option value="romance">Romance</option>
+                    <option value="mystery">Mystery</option>
+                    <option value="mythology">Mythology</option>
+                    <option value="adventure">Adventure</option>
+                </select>
+                <select id="tone-filter">
+                    <option value="all">All Tones</option>
+                    <option value="epic">Epic</option>
+                    <option value="mysterious">Mysterious</option>
+                    <option value="humorous">Humorous</option>
+                    <option value="dark">Dark</option>
+                    <option value="inspiring">Inspiring</option>
+                    <option value="romantic">Romantic</option>
+                </select>
+                <select id="length-filter">
+                    <option value="all">Any Length</option>
+                    <option value="short">Short (150 words)</option>
+                    <option value="medium">Medium (300 words)</option>
+                    <option value="long">Long (500+ words)</option>
+                </select>
+            </div>
+            <div class="sort-group">
+                <label>Sort by:</label>
+                <select id="sort">
+                    <option value="newest">Newest First</option>
+                    <option value="popular">Most Popular</option>
+                    <option value="views">Most Views</option>
+                    <option value="a-z">A to Z</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stories Grid -->
+    <section class="stories-grid">
+        <div class="grid-container">
+            <!-- Example Story Card -->
+            <div class="story-card">
+                <div class="card-header">
+                    <div class="author">
+                        <img src="https://via.placeholder.com/40" alt="Author">
+                        <span>ArjunM</span>
+                    </div>
+                    <div class="card-actions">
+                        <button><i class="fas fa-bookmark"></i></button>
+                        <button><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3>The Firebird's Prophecy</h3>
+                    <p>When the sacred firebird appears in the kingdom of Ayodhya, young prince Lakshman must decipher its ancient prophecy before darkness consumes the realm...</p>
+                </div>
+                <div class="card-meta">
+                    <span class="genre-tag">Mythology</span>
+                    <span class="tone-tag">Epic</span>
+                    <span class="length-tag">Medium</span>
+                </div>
+                <div class="card-stats">
+                    <span><i class="fas fa-eye"></i> 1.2K</span>
+                    <span><i class="fas fa-heart"></i> 324</span>
+                    <span><i class="fas fa-comment"></i> 78</span>
+                </div>
+                <button class="btn btn-outline read-btn">Read Full Story</button>
+            </div>
+            <!-- Add more story cards as needed, following the same structure -->
+        </div>
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="btn btn-outline"><i class="fas fa-arrow-left"></i> Previous</button>
+            <div class="page-numbers">
+                <span class="active">1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>...</span>
+                <span>10</span>
+            </div>
+            <button class="btn btn-outline">Next <i class="fas fa-arrow-right"></i></button>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <h2 class="section-title">Popular Categories</h2>
+        <div class="categories-grid">
+            <a href="#" class="category-card">
+                <div class="category-icon"><i class="fas fa-crown"></i></div>
+                <h3>Royal Epics</h3>
+                <p>Stories of kings, queens, and dynasties</p>
+            </a>
+            <a href="#" class="category-card">
+                <div class="category-icon"><i class="fas fa-dragon"></i></div>
+                <h3>Mythical Creatures</h3>
+                <p>Dragons, Garudas, and magical beings</p>
+            </a>
+            <a href="#" class="category-card">
+                <div class="category-icon"><i class="fas fa-heart"></i></div>
+                <h3>Divine Love</h3>
+                <p>Romances of gods and mortals</p>
+            </a>
+            <a href="#" class="category-card">
+                <div class="category-icon"><i class="fas fa-microscope"></i></div>
+                <h3>Sci-Fi Mythology</h3>
+                <p>Futuristic takes on ancient tales</p>
+            </a>
+        </div>
+    </section>
+    
+    <!-- Add just before the <footer> tag -->
+    <div id="storyModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo">
+                    <i class="fas fa-book-open"></i>
+                    Veda<span>Tale</span>
+                </div>
+                <p>Creating magical stories with AI, inspired by timeless wisdom. Unleash your imagination and become a storyteller today.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Create Story</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Story Gallery</a></li>
+                    <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="create.html"><i class="fas fa-chevron-right"></i> Create Story</a></li>
+                    <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Story Gallery</a></li>
+                    <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Story Lane, Creative City</p>
+                <p><i class="fas fa-envelope"></i> contact@vedatale.com</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 9AM - 6PM</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 VedaTale. All rights reserved. Crafting stories with AI since 2025.</p>
+        </div>
+    </footer>
+    <script src="/scripts/gallery.js"></script>
+</body>
+</html>

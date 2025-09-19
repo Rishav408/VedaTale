@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VedaTale - AI Storytelling Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo">
+            <i class="fas fa-book-open"></i>
+            Veda<span>Tale</span>
+        </a>
+        
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="create.html">Create</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <div class="header-controls">
+            <div class="theme-toggle">
+                <i class="fas fa-sun"></i>
+                <i class="fas fa-moon"></i>
+            </div>
+            <button class="btn btn-outline">Log In</button>
+            <button class="btn btn-primary">Sign Up</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>UNLEASH YOUR IMAGINATION</h1>
+        <p>Create magical stories and poems with AI, inspired by the timeless wisdom of Hindu mythology. Let ancient tales meet modern technology to craft your unique narrative.</p>
+        <div class="hero-buttons">
+            <button class="btn btn-primary">Start Creating</button>
+            <button class="btn btn-outline">Explore Gallery</button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2 class="section-title">Why Choose VedaTale</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>AI-POWERED</h3>
+                <p>Advanced AI creates unique stories tailored to your imagination with unprecedented creativity and coherence. Our algorithms understand narrative structure and character development.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-temple"></i>
+                </div>
+                <h3>RICH MYTHOLOGY</h3>
+                <p>Stories inspired by ancient wisdom and Hindu mythological traditions, bringing timeless tales to life. Draw from a vast repository of cultural heritage and spiritual knowledge.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>FOR EVERYONE</h3>
+                <p>Perfect for kids, parents, writers, and anyone who loves storytelling. Easy to use interface with powerful results that spark creativity across all age groups.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Creation Section -->
+    <section class="creation">
+        <div class="creation-container">
+            <div class="creation-title">
+                <h2>CREATE YOUR STORY</h2>
+                <p>Share your inspiration and watch magic unfold</p>
+            </div>
+            <form class="creation-form" id="storyForm">
+                <div class="form-group">
+                    <label for="inspiration">Your Story Inspiration</label>
+                    <textarea id="inspiration" placeholder="Enter themes (courage, friendship), keywords (dragon, forest), or start a sentence (The hero stood at the edge...)"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="genre">Story Genre</label>
+                    <select id="genre">
+                        <option value="">Choose your adventure...</option>
+                        <option value="fantasy">Fantasy</option>
+                        <option value="sci-fi">Sci-Fi</option>
+                        <option value="romance">Romance</option>
+                        <option value="mystery">Mystery</option>
+                        <option value="mythology">Mythology</option>
+                        <option value="adventure">Adventure</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tone">Story Tone</label>
+                    <select id="tone">
+                        <option value="">Set the mood...</option>
+                        <option value="epic">Epic</option>
+                        <option value="mysterious">Mysterious</option>
+                        <option value="humorous">Humorous</option>
+                        <option value="dark">Dark</option>
+                        <option value="inspiring">Inspiring</option>
+                        <option value="romantic">Romantic</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Story Length</label>
+                    <div class="length-options">
+                        <div class="length-option active" data-length="150">
+                            <h4>Short</h4>
+                            <p>150 words</p>
+                        </div>
+                        <div class="length-option" data-length="300">
+                            <h4>Medium</h4>
+                            <p>300 words</p>
+                        </div>
+                        <div class="length-option" data-length="500">
+                            <h4>Long</h4>
+                            <p>500 words</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary generate-btn">
+                    <i class="fas fa-wand-magic-sparkles"></i> Generate Story
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo">
+                    <i class="fas fa-book-open"></i>
+                    Veda<span>Tale</span>
+                </div>
+                <p>Creating magical stories with AI, inspired by timeless wisdom. Unleash your imagination and become a storyteller today. Our platform blends ancient traditions with cutting-edge technology.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="create.html"><i class="fas fa-chevron-right"></i> Create Story</a></li>
+                    <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Story Gallery</a></li>
+                    <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Blog</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Documentation</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Tutorials</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> API Access</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Community</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Story Lane, Creative City</p>
+                <p><i class="fas fa-envelope"></i> contact@vedatale.com</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 9AM - 6PM</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 VedaTale. All rights reserved. Crafting stories with AI since 2025.</p>
+        </div>
+    </footer>
+
+    <script src="/scripts/scripts.js"></script>
+</body>
+</html>
