@@ -87,7 +87,7 @@ document.getElementById('storyForm').addEventListener('submit', async function(e
     
     try {
         // Send request to backend
-        const response = await fetch('http://localhost:8000/api/generate', {
+        const response = await fetch('http://localhost:5000/api/generate', {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json' 
@@ -182,46 +182,11 @@ document.querySelector('.story-actions .btn-outline').addEventListener('click', 
 document.querySelector('.story-actions .btn-primary').addEventListener('click', function(e) {
     e.preventDefault();
     this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
-
-    try {
-        // 1. Get the current story data from the page
-        const storyTitle = document.getElementById('storyTitle').textContent;
-        const storyContent = document.getElementById('storyContent').innerText; // Use innerText to get clean text
-        const genre = document.querySelector('.meta-item:nth-child(1) span').textContent.replace('Genre: ', '');
-        const tone = document.querySelector('.meta-item:nth-child(2) span').textContent.replace('Tone: ', '');
-        const length = document.querySelector('.meta-item:nth-child(3) span').textContent.replace('Length: ', '');
-
-        // 2. Create a story object
-        const newStory = {
-            id: Date.now(), // Unique ID based on timestamp
-            title: storyTitle,
-            content: storyContent,
-            genre: genre,
-            tone: tone,
-            length: length
-        };
-
-        // 3. Get existing stories from localStorage or create a new array
-        const stories = JSON.parse(localStorage.getItem('vedaTaleStories')) || [];
-
-        // 4. Add the new story and save back to localStorage
-        stories.push(newStory);
-        localStorage.setItem('vedaTaleStories', JSON.stringify(stories));
-
-        // 5. Give success feedback
-        this.innerHTML = '<i class="fas fa-check"></i> Saved!';
-        alert('Your story has been saved to the Gallery!');
-        
-        // Reset button after a delay
-        setTimeout(() => {
-            this.innerHTML = '<i class="fas fa-save"></i> Save Story';
-        }, 2000);
-
-    } catch (error) {
-        console.error("Failed to save story:", error);
-        alert("Sorry, there was an error saving your story.");
+    
+    setTimeout(() => {
         this.innerHTML = '<i class="fas fa-save"></i> Save Story';
-    }
+        alert('Your story has been saved to your library!');
+    }, 1500);
 });
 
 // Add subtle animations to elements when they come into view

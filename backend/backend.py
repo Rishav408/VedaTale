@@ -1,102 +1,139 @@
-# Import necessary libraries
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles   # ✅ added
-from pydantic import BaseModel
 import os
+import google.generativeai as genai
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 from dotenv import load_dotenv
+import re
+from mythology_context import get_mythology_prompt
 
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import StrOutputParser
-from pathlib import Path
-BASE_DIR = Path(__file__).resolve().parent.parent
-# Load environment variables (like your API key) from the .env file
+# Load environment variables
 load_dotenv()
 
-# --- 1. LangChain Setup ---
+# Configure Google AI
+GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
+genai.configure(api_key=GOOGLE_API_KEY)
 
-veda_template = """
-You are VedaTale, a master storyteller who weaves tales inspired by Hindu mythology, ancient wisdom, and timeless fables. Your voice is enchanting, wise, and suitable for all ages.
+# Initialize the model
+model = genai.GenerativeModel('gemini-1.5-flash')
 
-Generate a complete story based on the user's request.
+app = Flask(__name__)
+CORS(app)  # Enable CORS for frontend-backend communication
 
-**Story Requirements:**
-- **Inspiration/Theme**: {inspiration}
-- **Genre**: {genre}
-- **Tone**: {tone}
-- **Approximate Length**: {length} words
-- **Suggested Title (optional)**: {title}
+def estimate_token_count(text):
+    """Estimate token count (1 token ≈ 4 characters)"""
+    return max(50, len(text) // 4)
 
-**Your Task:**
-1. If the user did not provide a title, create a fitting and imaginative title for the story.
-2. Write a compelling story that beautifully incorporates all the user's requirements.
-3. Ensure the narrative is coherent, engaging, and flows naturally.
-4. Format your response with the title on the very first line, followed by a blank line, and then the full story content.
-
-**Your Generated Story:**
-"""
-
-llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.8)
-prompt = ChatPromptTemplate.from_template(veda_template)
-output_parser = StrOutputParser()
-chain = prompt | llm | output_parser
-
-# --- 2. FastAPI Server Setup ---
-
-app = FastAPI()
-
-# CORS setup
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-# Data model
-class StoryRequest(BaseModel):
-    inspiration: str
-    title: str | None = None
-    genre: str
-    tone: str
-    length: int
-
-# --- 3. API Endpoint ---
-
-@app.post("/api/generate")
-async def generate_story(request: StoryRequest):
+@app.route('/api/generate', methods=['POST'])
+def generate_story():
     try:
-        result = chain.invoke(request.dict())
-
-        first_newline = result.find('\n')
-        if first_newline == -1:
-            story_title = request.title or "A New Tale"
-            story_content = result.strip()
+        # Get request data
+        data = request.json
+        inspiration = data.get('inspiration', '')
+        genre = data.get('genre', 'mythology')
+        tone = data.get('tone', 'epic')
+        length = int(data.get('length', 150))
+        title = data.get('title', '')
+        
+        # Validate input
+        if not inspiration:
+            return jsonify({"error": "Story inspiration is required"}), 400
+        
+        # Generate mythology context
+        mythology_prompt = get_mythology_prompt(genre, tone)
+        
+        # Create detailed prompt
+        prompt = f"""
+        You are VedaTale, an AI storyteller specializing in family-friendly narratives inspired by Hindu mythology.
+        Generate a {length}-word {genre} story with a {tone} tone.
+        
+        Mythology Context: {mythology_prompt}
+        User Inspiration: {inspiration}
+        
+        Guidelines:
+        1. Weave Hindu mythological elements naturally into the narrative
+        2. Maintain a {tone} tone throughout
+        3. Create {length} words exactly (count and verify)
+        4. Structure the story with a clear beginning, middle, and end
+        5. Focus on positive themes like courage, wisdom, devotion, and righteousness
+        6. Keep content appropriate for all ages
+        7. {f"Title: {title}" if title else "Generate a creative title"}
+        
+        Output Format:
+        Title: [Generated Title]
+        Content: [Story Content]
+        """
+        
+        # Generate story
+        response = model.generate_content(
+            prompt,
+            generation_config=genai.types.GenerationConfig(
+                max_output_tokens=estimate_token_count(prompt) * 2,
+                temperature=0.8 if tone == "creative" else 0.5,
+                top_p=0.9
+            ),
+            safety_settings=[
+                {
+                    "category": "HARM_CATEGORY_HARASSMENT",
+                    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+                },
+                {
+                    "category": "HARM_CATEGORY_HATE_SPEECH", 
+                    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+                },
+                {
+                    "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+                },
+                {
+                    "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+                    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+                }
+            ]
+        )
+        
+        # Check if response is valid
+        if not response.text:
+            # Check finish reason
+            if hasattr(response, 'candidates') and response.candidates:
+                finish_reason = response.candidates[0].finish_reason
+                if finish_reason == 2:  # SAFETY
+                    return jsonify({"error": "Content was blocked by safety filters. Please try a different inspiration or tone."}), 400
+                elif finish_reason == 3:  # RECITATION
+                    return jsonify({"error": "Content was blocked due to recitation concerns. Please try a different inspiration."}), 400
+                elif finish_reason == 4:  # OTHER
+                    return jsonify({"error": "Content generation failed. Please try again."}), 400
+                else:
+                    return jsonify({"error": f"Content generation failed with reason: {finish_reason}"}), 400
+            else:
+                return jsonify({"error": "No content generated. Please try again."}), 400
+        
+        # Process response
+        story_text = response.text.strip()
+        
+        # Extract title if not provided
+        if not title:
+            title_match = re.search(r'Title: (.+)', story_text)
+            if title_match:
+                title = title_match.group(1).strip()
+                story_text = story_text.replace(title_match.group(0), '').strip()
+        
+        # Clean up content
+        content_match = re.search(r'Content: (.+)', story_text, re.DOTALL)
+        if content_match:
+            content = content_match.group(1).strip()
         else:
-            story_title = result[:first_newline].strip().replace('**', '')
-            story_content = result[first_newline:].strip()
-
-        return {"title": story_title, "content": story_content}
+            content = story_text
+        
+        return jsonify({
+            "title": title,
+            "content": content,
+            "genre": genre,
+            "tone": tone,
+            "length": length
+        })
+    
     except Exception as e:
-        print(f"An error occurred: {e}")
-        return {"error": "Failed to generate story from AI."}
+        return jsonify({"error": str(e)}), 500
 
-# --- 4. Serve Static Pages ---
-# ✅ This makes everything inside the "pages" folder available at "/"
-app.mount("/", StaticFiles(directory=BASE_DIR / "pages", html=True), name="static-pages")
-# Serve CSS at /styles/*
-app.mount("/styles", StaticFiles(directory=BASE_DIR / "styles"), name="static-styles")
-# Serve JS at /scripts/*
-app.mount("/scripts", StaticFiles(directory=BASE_DIR / "scripts"), name="static-scripts")
-
-
-# --- 5. Server Startup ---
-
-if __name__ == "__main__":
-    import uvicorn
-    print("Starting VedaTale Backend Server...")
-    print("Server will be available at: http://localhost:8000")
-    print("API documentation at: http://localhost:8000/docs")
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
