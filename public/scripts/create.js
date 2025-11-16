@@ -87,7 +87,8 @@ document.getElementById('storyForm').addEventListener('submit', async function(e
     
     try {
         // Send request to backend
-        const response = await fetch('http://localhost:5000/api/generate', {
+        const apiUrl = window.API_CONFIG ? window.API_CONFIG.getBaseURL() : 'http://localhost:5000/api';
+        const response = await fetch(`${apiUrl}/generate`, {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json' 

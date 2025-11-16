@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Stories - VedaTale</title>
+    <title>VedaTale - AI Storytelling Platform</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="/styles/create.css">
-
+    <link rel="stylesheet" href="/styles/style.css">
 </head>
 <body>
     <!-- Header -->
     <header>
-        <a href="index.html" class="logo">
+        <a href="#" class="logo">
             <i class="fas fa-book-open"></i>
             Veda<span>Tale</span>
         </a>
@@ -25,11 +24,11 @@
         
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="create.html">Create</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/pages/create.html">Create</a></li>
+                <li><a href="/pages/gallery.html">Gallery</a></li>
+                <li><a href="/pages/about.html">About</a></li>
+                <li><a href="/pages/contact.html">Contact</a></li>
             </ul>
         </nav>
         
@@ -43,23 +42,55 @@
         </div>
     </header>
 
-    <!-- Page Content -->
-    <main class="page-content">
-        <div class="page-header">
-            <h1>Create Your Story</h1>
-            <p>Unleash your imagination and craft magical tales inspired by ancient wisdom and modern AI technology.</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>UNLEASH YOUR IMAGINATION</h1>
+        <p>Create magical stories and poems with AI, inspired by the timeless wisdom of Hindu mythology. Let ancient tales meet modern technology to craft your unique narrative.</p>
+        <div class="hero-buttons">
+            <a href="/pages/create.html" class="btn btn-primary">Start Creating</a>
+            <a href="/pages/gallery.html" class="btn btn-outline">Explore Gallery</a>
         </div>
+    </section>
 
+    <!-- Features Section -->
+    <section class="features">
+        <h2 class="section-title">Why Choose VedaTale</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>AI-POWERED</h3>
+                <p>Advanced AI creates unique stories tailored to your imagination with unprecedented creativity and coherence. Our algorithms understand narrative structure and character development.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-temple"></i>
+                </div>
+                <h3>RICH MYTHOLOGY</h3>
+                <p>Stories inspired by ancient wisdom and Hindu mythological traditions, bringing timeless tales to life. Draw from a vast repository of cultural heritage and spiritual knowledge.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>FOR EVERYONE</h3>
+                <p>Perfect for kids, parents, writers, and anyone who loves storytelling. Easy to use interface with powerful results that spark creativity across all age groups.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Creation Section -->
+    <section class="creation">
         <div class="creation-container">
+            <div class="creation-title">
+                <h2>CREATE YOUR STORY</h2>
+                <p>Share your inspiration and watch magic unfold</p>
+            </div>
             <form class="creation-form" id="storyForm">
                 <div class="form-group">
                     <label for="inspiration">Your Story Inspiration</label>
                     <textarea id="inspiration" placeholder="Enter themes (courage, friendship), keywords (dragon, forest), or start a sentence (The hero stood at the edge...)"></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="title">Story Title</label>
-                    <input type="text" id="title" placeholder="Give your story a title (optional)">
                 </div>
                 
                 <div class="form-group">
@@ -72,8 +103,6 @@
                         <option value="mystery">Mystery</option>
                         <option value="mythology">Mythology</option>
                         <option value="adventure">Adventure</option>
-                        <option value="historical">Historical</option>
-                        <option value="horror">Horror</option>
                     </select>
                 </div>
                 
@@ -87,8 +116,6 @@
                         <option value="dark">Dark</option>
                         <option value="inspiring">Inspiring</option>
                         <option value="romantic">Romantic</option>
-                        <option value="whimsical">Whimsical</option>
-                        <option value="suspenseful">Suspenseful</option>
                     </select>
                 </div>
                 
@@ -107,10 +134,6 @@
                             <h4>Long</h4>
                             <p>500 words</p>
                         </div>
-                        <div class="length-option" data-length="800">
-                            <h4>Epic</h4>
-                            <p>800 words</p>
-                        </div>
                     </div>
                 </div>
                 
@@ -119,48 +142,7 @@
                 </button>
             </form>
         </div>
-
-        <div class="story-display" id="storyDisplay">
-            <div class="story-header">
-                <h2 class="story-title" id="storyTitle">The Guardian of the Ancient Temple</h2>
-                <div class="story-actions">
-                    <button class="btn btn-outline">
-                        <i class="fas fa-redo"></i> Regenerate
-                    </button>
-                    <button class="btn btn-primary">
-                        <i class="fas fa-save"></i> Save Story
-                    </button>
-                </div>
-            </div>
-            
-            <div class="story-content" id="storyContent">
-                <p>In the heart of the dense, mystical forest stood an ancient temple, forgotten by time but guarded by a spirit of immense power. The temple held secrets of a civilization long lost, and only the pure of heart could unlock its mysteries.</p>
-                
-                <p>A young adventurer named Arjun, driven by tales of the temple's hidden wisdom, ventured into the forest. With courage as his compass and determination as his guide, he navigated through treacherous paths and mystical creatures that tested his resolve at every turn.</p>
-                
-                <p>As Arjun approached the temple, the air grew thick with magic. The ancient stones seemed to whisper secrets of the past, and the carvings on the walls glowed with a soft, ethereal light. He knew he was close to uncovering the truth that had eluded seekers for centuries.</p>
-                
-                <p>Standing before the massive stone doors, Arjun felt a presence. The temple guardian appeared, a magnificent being of light and shadow. "Why do you seek the wisdom of the ancients?" the guardian asked, its voice echoing through the silent forest.</p>
-                
-                <p>Arjun spoke of his quest for knowledge, not for power, but to heal his village suffering from a mysterious blight. The guardian, moved by his selfless intent, granted him access to the temple's inner sanctum where the ancient scrolls revealed the cure he sought.</p>
-            </div>
-            
-            <div class="story-meta">
-                <div class="meta-item">
-                    <i class="fas fa-book"></i>
-                    <span>Genre: Mythology</span>
-                </div>
-                <div class="meta-item">
-                    <i class="fas fa-feather"></i>
-                    <span>Tone: Epic</span>
-                </div>
-                <div class="meta-item">
-                    <i class="fas fa-ruler"></i>
-                    <span>Length: 500 words</span>
-                </div>
-            </div>
-        </div>
-    </main>
+    </section>
 
     <!-- Footer -->
     <footer>
@@ -170,7 +152,7 @@
                     <i class="fas fa-book-open"></i>
                     Veda<span>Tale</span>
                 </div>
-                <p>Creating magical stories with AI, inspired by timeless wisdom. Unleash your imagination and become a storyteller today.</p>
+                <p>Creating magical stories with AI, inspired by timeless wisdom. Unleash your imagination and become a storyteller today. Our platform blends ancient traditions with cutting-edge technology.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
@@ -182,11 +164,11 @@
             <div class="footer-col">
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
-                    <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
-                    <li><a href="create.html"><i class="fas fa-chevron-right"></i> Create Story</a></li>
-                    <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Story Gallery</a></li>
-                    <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
-                    <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    <li><a href="/"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="/pages/create.html"><i class="fas fa-chevron-right"></i> Create Story</a></li>
+                    <li><a href="/pages/gallery.html"><i class="fas fa-chevron-right"></i> Story Gallery</a></li>
+                    <li><a href="/pages/about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="/pages/contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
                 </ul>
             </div>
             
@@ -215,6 +197,6 @@
         </div>
     </footer>
 
-<script src="/scripts/create.js"></script>
+    <script src="/scripts/scripts.js"></script>
 </body>
 </html>
