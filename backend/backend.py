@@ -22,8 +22,9 @@ app = Flask(__name__)
 CORS(app, resources={
     r"/api/*": {
         "origins": [
-            "https://vedatale-4805.web.app",
-            "https://vedatale-4805.firebaseapp.com",
+            "https://vedatale-frontend.onrender.com",  # Render frontend
+            "https://vedatale-4805.web.app",  # Firebase (keep for backup)
+            "https://vedatale-4805.firebaseapp.com",  # Firebase alternative
             "http://localhost:5000",
             "http://127.0.0.1:5000"
         ],
