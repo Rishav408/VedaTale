@@ -6,7 +6,7 @@ const API_CONFIG = {
     // Options: Railway, Render, PythonAnywhere, etc.
     // Example: 'https://your-app-name.railway.app/api'
     // Example: 'https://vedatale-backend.onrender.com/api'
-    PRODUCTION: 'https://your-backend-url.com/api',
+    PRODUCTION: 'https://vedatale.onrender.com/api',
     
     // Local development API URL
     LOCAL: 'http://localhost:5000/api',

@@ -136,7 +136,15 @@ document.getElementById('storyForm').addEventListener('submit', async function(e
         
     } catch (error) {
         console.error('Error:', error);
-        alert(`Error: ${error.message}`);
+        console.error('API URL used:', apiUrl);
+        console.error('Full error details:', error);
+        
+        // More detailed error message
+        let errorMessage = error.message;
+        if (error.message === 'Failed to fetch') {
+            errorMessage = 'Cannot connect to backend server. The server might be starting up (wait 30 seconds) or there might be a network issue.';
+        }
+        alert(`Error: ${errorMessage}`);
     } finally {
         // Reset button
         submitBtn.innerHTML = originalBtnText;

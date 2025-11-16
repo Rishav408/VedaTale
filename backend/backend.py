@@ -17,11 +17,29 @@ genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel('gemini-1.5-flash')
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for frontend-backend communication
+# Enable CORS for frontend-backend communication
+# Allow requests from Firebase domain and localhost
+CORS(app, resources={
+    r"/api/*": {
+        "origins": [
+            "https://vedatale-4805.web.app",
+            "https://vedatale-4805.firebaseapp.com",
+            "http://localhost:5000",
+            "http://127.0.0.1:5000"
+        ],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"]
+    }
+})
 
 def estimate_token_count(text):
     """Estimate token count (1 token ≈ 4 characters)"""
     return max(50, len(text) // 4)
+
+@app.route('/api/health', methods=['GET'])
+def health_check():
+    """Health check endpoint"""
+    return jsonify({"status": "ok", "message": "Backend is running"}), 200
 
 @app.route('/api/generate', methods=['POST'])
 def generate_story():
